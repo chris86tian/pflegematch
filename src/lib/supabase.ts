@@ -12,5 +12,20 @@ if (supabaseAnonKey === 'YOUR_SUPABASE_ANON_KEY') {
   throw new Error('Supabase Anon Key is still set to the placeholder value. Please update your .env file.');
 }
 
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create the Supabase client with fetch options to handle CORS
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true
+  },
+  global: {
+    fetch: (...args) => {
+      // @ts-ignore
+      return fetch(...args);
+    },
+    headers: {
+      'X-Client-Info': 'pflegematch-web'
+    }
+  }
+});

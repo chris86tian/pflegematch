@@ -21,12 +21,16 @@ interface RegisterFormData {
 export function Register() {
   const [userType, setUserType] = useState<UserType | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>();
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
       setError(null);
+      setLoading(true);
+      
+      console.log('Starting registration process...');
       
       // Register user with Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -40,9 +44,13 @@ export function Register() {
         }
       });
 
+      console.log('Auth response:', { authData, authError });
+
       if (authError) throw authError;
 
       if (authData.user) {
+        console.log('User created, adding profile data...');
+        
         // Store additional user data in profiles table
         const { error: profileError } = await supabase
           .from('profiles')
@@ -59,13 +67,18 @@ export function Register() {
             }
           ]);
 
+        console.log('Profile insert response:', { profileError });
+
         if (profileError) throw profileError;
 
         // Redirect to dashboard
         navigate('/dashboard');
       }
     } catch (err) {
+      console.error('Registration error:', err);
       setError(err instanceof Error ? err.message : 'Ein Fehler ist aufgetreten');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -254,9 +267,10 @@ export function Register() {
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                disabled={loading}
+                className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
               >
-                Registrieren
+                {loading ? 'Registrierung läuft...' : 'Registrieren'}
               </button>
             </div>
           </form>

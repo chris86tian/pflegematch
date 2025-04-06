@@ -15,10 +15,14 @@ export function Login() {
     setError(null);
 
     try {
+      console.log('Attempting login...');
+      
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
+
+      console.log('Login response:', { signInError });
 
       if (signInError) {
         console.error('Supabase Login Error:', signInError);
