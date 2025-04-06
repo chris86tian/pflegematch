@@ -1,8 +1,8 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { BriefcaseIcon, BuildingIcon, UserCheck } from 'lucide-react';
 import { Footer } from './components/Footer';
-import { FAQ } from './components/FAQ'; // Import FAQ component
+import { FAQ } from './components/FAQ';
 import { Privacy } from './pages/Privacy';
 import { Imprint } from './pages/Imprint';
 import { Terms } from './pages/Terms';
@@ -10,6 +10,8 @@ import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 
 function HomePage() {
+  const navigate = useNavigate(); // Get navigate function
+
   return (
     <>
       {/* Hero Section */}
@@ -46,12 +48,13 @@ function HomePage() {
                   Vermittlungsprozess transparent steuern
                 </li>
               </ul>
-              <Link
-                to="/registrieren"
+              {/* Use button with navigate */}
+              <button
+                onClick={() => navigate('/registrieren')}
                 className="mt-8 block w-full text-center px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700"
               >
                 Als Einrichtung registrieren
-              </Link>
+              </button>
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
@@ -73,12 +76,13 @@ function HomePage() {
                   Vermittlungsstatus in Echtzeit verfolgen
                 </li>
               </ul>
-              <Link
-                to="/registrieren"
+              {/* Use button with navigate */}
+              <button
+                onClick={() => navigate('/registrieren')}
                 className="mt-8 block w-full text-center px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700"
               >
                 Als Vermittler registrieren
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -125,30 +129,34 @@ function HomePage() {
 }
 
 function App() {
+  const navigate = useNavigate(); // Get navigate function
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
+            {/* Keep Logo as Link for standard navigation */}
             <Link to="/" className="flex items-center">
               <UserCheck className="h-8 w-8 text-blue-600" />
               <h1 className="ml-2 text-2xl font-semibold text-gray-900">PflegeMatch</h1>
             </Link>
             <nav className="flex space-x-4">
-              {/* Change button to Link */}
-              <Link
-                to="/anmelden"
+              {/* Use button with navigate for Anmelden */}
+              <button
+                onClick={() => navigate('/anmelden')}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
               >
                 Anmelden
-              </Link>
-              <Link
-                to="/registrieren"
+              </button>
+              {/* Use button with navigate for Registrieren */}
+              <button
+                onClick={() => navigate('/registrieren')}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
               >
                 Registrieren
-              </Link>
+              </button>
             </nav>
           </div>
         </div>
