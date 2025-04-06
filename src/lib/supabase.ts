@@ -20,12 +20,11 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true
   },
   global: {
-    fetch: (...args) => {
-      // @ts-ignore
-      return fetch(...args);
-    },
     headers: {
       'X-Client-Info': 'pflegematch-web'
     }
   }
 });
+
+// Log connection status to help with debugging
+console.log('Supabase client initialized with URL:', supabaseUrl);
