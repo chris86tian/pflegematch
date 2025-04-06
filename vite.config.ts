@@ -7,4 +7,11 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  preview: {
+    host: '0.0.0.0', // Ensure preview server listens on all interfaces
+    port: Number(process.env.PORT) || 5173, // Use PORT from env or default
+    allowedHosts: [
+      'pflegematch.lipahub.de', // Add your deployment host here
+    ],
+  },
 });
