@@ -43,7 +43,7 @@ export function Footer() {
                 </a>
               </p>
               <p>
-                <a href="mailto:info@zintl.magement" className="hover:text-blue-600">
+                <a href="mailto:info@zintl.management" className="hover:text-blue-600">
                   info@zintl.magement
                 </a>
               </p>

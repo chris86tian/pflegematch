@@ -2,11 +2,12 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { BriefcaseIcon, BuildingIcon, UserCheck } from 'lucide-react';
 import { Footer } from './components/Footer';
+import { FAQ } from './components/FAQ'; // Import FAQ component
 import { Privacy } from './pages/Privacy';
 import { Imprint } from './pages/Imprint';
 import { Terms } from './pages/Terms';
 import { Register } from './pages/Register';
-import { Login } from './pages/Login'; // Import Login component
+import { Login } from './pages/Login';
 
 function HomePage() {
   return (
@@ -114,6 +115,10 @@ function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* FAQ Section */}
+        <FAQ />
+
       </main>
     </>
   );
@@ -155,7 +160,7 @@ function App() {
         <Route path="/impressum" element={<Imprint />} />
         <Route path="/agb" element={<Terms />} />
         <Route path="/registrieren" element={<Register />} />
-        <Route path="/anmelden" element={<Login />} /> {/* Add Login route */}
+        <Route path="/anmelden" element={<Login />} />
       </Routes>
 
       <Footer />
