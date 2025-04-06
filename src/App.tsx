@@ -1,11 +1,12 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { BriefcaseIcon, BuildingIcon, UserCheck } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Privacy } from './pages/Privacy';
 import { Imprint } from './pages/Imprint';
 import { Terms } from './pages/Terms';
 import { Register } from './pages/Register';
+import { Login } from './pages/Login'; // Import Login component
 
 function HomePage() {
   return (
@@ -44,9 +45,12 @@ function HomePage() {
                   Vermittlungsprozess transparent steuern
                 </li>
               </ul>
-              <button className="mt-8 w-full px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700">
+              <Link
+                to="/registrieren"
+                className="mt-8 block w-full text-center px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
                 Als Einrichtung registrieren
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
@@ -68,9 +72,12 @@ function HomePage() {
                   Vermittlungsstatus in Echtzeit verfolgen
                 </li>
               </ul>
-              <button className="mt-8 w-full px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700">
+              <Link
+                to="/registrieren"
+                className="mt-8 block w-full text-center px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
                 Als Vermittler registrieren
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -119,17 +126,24 @@ function App() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center">
               <UserCheck className="h-8 w-8 text-blue-600" />
               <h1 className="ml-2 text-2xl font-semibold text-gray-900">PflegeMatch</h1>
-            </div>
+            </Link>
             <nav className="flex space-x-4">
-              <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+              {/* Change button to Link */}
+              <Link
+                to="/anmelden"
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
+              >
                 Anmelden
-              </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+              </Link>
+              <Link
+                to="/registrieren"
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
                 Registrieren
-              </button>
+              </Link>
             </nav>
           </div>
         </div>
@@ -141,6 +155,7 @@ function App() {
         <Route path="/impressum" element={<Imprint />} />
         <Route path="/agb" element={<Terms />} />
         <Route path="/registrieren" element={<Register />} />
+        <Route path="/anmelden" element={<Login />} /> {/* Add Login route */}
       </Routes>
 
       <Footer />
